@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+/* Define custom colors using CSS variables */
+@theme {
+  --color-primary: #322625;
+  --color-secondary: #ebebeb;
+  --color-accent: #c0e3e5;
+  --color-highlight: #fdc936;
+  --color-tableHeader: #c0e3e5;
+  --color-body-bg: #ebebeb;
+}
+
+@font-face {
+  font-family: 'Neutra Text';
+  src: url('./assets/fonts/neutra-text-alt-587261020eccb.otf') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+body {
+  font-family: 'Neutra Text', sans-serif;
+  background-color: #ebebeb;
+}
