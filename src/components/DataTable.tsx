@@ -71,7 +71,7 @@ const DataTable = ({
 
   return (
     <div className="bg-white rounded-lg shadow">
-      <div className="p-4 flex justify-between items-center border-b">
+      <div className="p-4 flex flex-wrap justify-between items-center border-b">
         <div className="flex items-center space-x-4">
           <div className="relative">
             <select
@@ -94,16 +94,16 @@ const DataTable = ({
               <Search size={20} />
             </button>
             {showSearch && (
-              <div className="flex space-x-4">
+              <div className="flex flex-wrap space-x-4">
                 {filters.map((filter) => (
-                  <div key={filter.key} className="flex items-center space-x-1">
+                  <div key={filter.key} className="flex items-center space-x-1 mb-2 sm:mb-0">
                     <span className="text-sm font-medium">{filter.label}:</span>
                     <input
                       type="text"
                       value={activeFilters[filter.key] || ''}
                       onChange={(e) => handleFilterChange(filter.key, e.target.value)}
                       placeholder={filter.label}
-                      className="border rounded px-2 py-1 text-sm w-24"
+                      className="border rounded px-2 py-1 text-sm w-24 sm:w-auto"
                     />
                   </div>
                 ))}
