@@ -13,13 +13,28 @@ const columns = [
   { key: 'age', label: 'Age' },
   { key: 'gender', label: 'Gender', filterable: true },
   { key: 'email', label: 'Email', filterable: true },
-  { key: 'phone', label: 'Phone'},
+  { key: 'phone', label: 'Phone' },
   { key: 'username', label: 'Username' },
-  { key: 'birthDate', label: 'Birth Date', filterable: true  },
+  { key: 'birthDate', label: 'Birth Date', filterable: true },
   { key: 'bloodGroup', label: 'Blood Group' },
   { key: 'eyeColor', label: 'Eye Color' },
-
 ];
+
+// Define the User interface (ensure this matches the shape of your user data)
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  maidenName: string;
+  age: number;
+  gender: string;
+  email: string;
+  phone: string;
+  username: string;
+  birthDate: string;
+  bloodGroup: string;
+  eyeColor: string;
+}
 
 const Users = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -40,7 +55,7 @@ const Users = () => {
     // Apply all active filters
     return Object.entries(filters).every(([key, value]) => {
       if (!value) return true;
-      
+
       // Special case for name filter - check both first and last name
       if (key === 'firstName' && value) {
         return (
@@ -48,9 +63,12 @@ const Users = () => {
           (user.lastName && user.lastName.toLowerCase().includes(value.toLowerCase()))
         );
       }
-      
-      // For other filters
-      return user[key] && user[key].toString().toLowerCase().includes(value.toLowerCase());
+
+      // For other filters, safely access the user property
+      return user[key as keyof User] && user[key as keyof User]
+        .toString()
+        .toLowerCase()
+        .includes(value.toLowerCase());
     });
   });
 

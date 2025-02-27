@@ -24,8 +24,6 @@ const DataTable = ({
   columns,
   pageSize,
   onPageSizeChange,
-  searchTerm,
-  onSearchChange,
   loading,
   onFilterChange,
 }: DataTableProps) => {

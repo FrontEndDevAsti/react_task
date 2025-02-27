@@ -5,10 +5,15 @@ interface User {
   id: number;
   firstName: string;
   lastName: string;
+  maidenName:string;
+  age:string;
+  gender:string;
   email: string;
   phone: string;
   username: string;
-  // Add other fields as needed
+  birthDate:string;
+  bloodGroup:string;
+  eyeColor:string;
 }
 
 interface UsersState {

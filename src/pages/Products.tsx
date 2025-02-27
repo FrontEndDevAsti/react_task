@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store';
-import { 
-  fetchProducts, 
-  setSearchTerm, 
-  setPageSize, 
+import {
+  fetchProducts,
+  setSearchTerm,
+  setPageSize,
   setCurrentPage,
-  setActiveTab 
+  setActiveTab
 } from '../store/productsSlice';
 import DataTable from '../components/DataTable';
 import Pagination from '../components/Pagination';
@@ -22,6 +22,17 @@ const columns = [
   { key: 'discountPercentage', label: 'Discount' },
 ];
 
+interface Product {
+  id: number;
+  title: string;
+  brand: string;
+  category: string;
+  price: number;
+  rating: number;
+  stock: number;
+  discountPercentage: number;
+}
+
 const Products = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { 
@@ -33,6 +44,7 @@ const Products = () => {
     currentPage,
     activeTab 
   } = useSelector((state: RootState) => state.products);
+
   const [filters, setFilters] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -47,11 +59,14 @@ const Products = () => {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
-  const filteredData = items.filter((product) => {
+  const filteredData = items.filter((product: Product) => {
     // Apply all active filters
     return Object.entries(filters).every(([key, value]) => {
       if (!value) return true;
-      return product[key] && product[key].toString().toLowerCase().includes(value.toLowerCase());
+      return product[key as keyof Product] && product[key as keyof Product]
+        .toString()
+        .toLowerCase()
+        .includes(value.toLowerCase());
     });
   });
 

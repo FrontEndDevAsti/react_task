@@ -7,7 +7,9 @@ interface Product {
   brand: string;
   category: string;
   price: number;
-  // Add other fields as needed
+  rating: number;
+  stock: number;
+  discountPercentage: number;
 }
 
 interface ProductsState {
